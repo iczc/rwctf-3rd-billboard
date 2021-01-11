@@ -1,0 +1,36 @@
+{
+    "type": "cosmos-sdk/StdTx",
+    "value": {
+        "msg": [
+            {
+                "type": "billboard/deposit",
+                "value": {
+                    "id": "75b6a9be95d0c525eaac199cef2ab63ad2fe4d0da7080b2d9d631fb69aa1b01a",
+                    "amount": {
+                        "denom": "ctc",
+                        "amount": "100"
+                    },
+                    "depositor": "cosmos12kgjc5jmqrnskzxuxte9pl4drc7keulzl4jjgv"
+                }
+            },
+            {
+                "type": "billboard/DeleteAdvertisement",
+                "value": {
+                    "id": "kumamon",
+                    "creator": "cosmos12kgjc5jmqrnskzxuxte9pl4drc7keulzl4jjgv"
+                }
+            }
+        ],
+        "fee": {
+            "amount": [
+                {
+                    "denom": "ctc",
+                    "amount": "10"
+                }
+            ],
+            "gas": "200000"
+        },
+        "signatures": null,
+        "memo": ""
+    }
+}
