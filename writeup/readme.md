@@ -1,5 +1,5 @@
 # Intended Solution to *Billboard* in Real World CTF 2020/2021
-
+Writeup Author: [iczc](https://github.com/iczc) & [Soreat_u](https://github.com/soreatu)
 ## Overview
 *Billboard* is a **public chain CTF challenge** built by using [Cosmos SDK](https://cosmos.network/) and [Tendermint](https://tendermint.com/). 
 
