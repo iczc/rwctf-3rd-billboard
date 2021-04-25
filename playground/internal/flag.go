@@ -1,10 +1,10 @@
-package service
+package internal
 
 import (
 	"errors"
 	"strings"
 
-	"github.com/iczc/billboard/playground/pkg/util"
+	"github.com/iczc/billboard/playground/util"
 )
 
 type Verifier struct {

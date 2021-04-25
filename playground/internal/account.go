@@ -1,4 +1,4 @@
-package service
+package internal
 
 import (
 	"strings"
@@ -6,7 +6,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keys"
 	"github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/iczc/billboard/playground/pkg/util"
+	"github.com/iczc/billboard/playground/util"
 )
 
 type Account struct {

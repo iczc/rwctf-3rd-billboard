@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/iczc/billboard/playground/internal/service"
+	"github.com/iczc/billboard/playground/internal"
 )
 
 type Resp struct {
@@ -38,8 +38,8 @@ func getFlagByTxHash(context *gin.Context) {
 		return
 	}
 
-	account := service.NewAccount(token)
-	verifier := service.NewFlagVerifier(txHash, account)
+	account := internal.NewAccount(token)
+	verifier := internal.NewFlagVerifier(txHash, account)
 	err := verifier.ValidateTx(os.Getenv("LCD"))
 	if err != nil {
 		resp(context, err.Error(), "", "")
