@@ -6,18 +6,42 @@ services:
     ports:
       - "26657:26657"
     volumes:
-      - "./genesis:/root/.billboardd"
+      - ./genesis:/root/.billboardd
     command: billboardd start
-    restart: always
 
   lcd:
     build: ..
-    container_name: rest-server
-    ports:
-      - "1317:1317"
+    container_name: light-client-daemon
+    expose:
+      - "1317"
     links:
       - node
     command: billboardcli rest-server --laddr tcp://0.0.0.0:1317 --node tcp://node:26657 --trust-node=true
     depends_on:
       - node
-    restart: always
+
+  api:
+    build: playground
+    container_name: playground-api
+    expose:
+      - "8080"
+    links:
+      - lcd
+    command: server
+    depends_on:
+      - lcd
+
+  web:
+    image: nginx:stable-alpine
+    container_name: playground-web
+    ports:
+      - "80:8080"
+    links:
+      - api
+    env_file:
+      - ./playground/.env
+    volumes:
+      - ./playground/frontend/dist:/usr/share/nginx/html
+      - ./playground/nginx:/etc/nginx/templates
+    depends_on:
+      - api
