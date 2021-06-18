@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  node:
+    build: ..
+    container_name: billboardd
+    ports:
+      - "26657:26657"
+    volumes:
+      - "./genesis:/root/.billboardd"
+    command: billboardd start
+    restart: always
+
+  lcd:
+    build: ..
+    container_name: rest-server
+    ports:
+      - "1317:1317"
+    links:
+      - node
+    command: billboardcli rest-server --laddr tcp://0.0.0.0:1317 --node tcp://node:26657 --trust-node=true
+    depends_on:
+      - node
+    restart: always
