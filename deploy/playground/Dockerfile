@@ -1,7 +1,7 @@
 # > docker build -t playground .
 FROM golang:alpine AS build-env
 
-WORKDIR /go/src/github.com/iczc/billboard/playground
+WORKDIR /build
 
 COPY . .
 
@@ -12,7 +12,8 @@ FROM alpine
 RUN apk add --update ca-certificates
 WORKDIR /app
 
-COPY --from=build-env /go/src/github.com/iczc/billboard/playground/billboard-playground .
+COPY --from=build-env /build/.env .
+COPY --from=build-env /build/billboard-playground .
 
 EXPOSE 8080
 
