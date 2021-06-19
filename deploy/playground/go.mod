@@ -7,6 +7,5 @@ require (
 	github.com/cosmos/cosmos-sdk v0.39.1
 	github.com/gin-gonic/gin v1.6.3
 	github.com/joho/godotenv v1.3.0
-	github.com/spf13/cobra v1.1.1
 	github.com/tendermint/tendermint v0.33.8
 )

@@ -1,12 +1,9 @@
-package server
+package api
 
 import (
 	"net/http"
-	"os"
 
 	"github.com/gin-gonic/gin"
-
-	"github.com/iczc/billboard/playground/internal"
 )
 
 type Resp struct {
@@ -25,26 +22,18 @@ func resp(context *gin.Context, err, msg, data string) {
 	context.JSON(http.StatusOK, resp)
 }
 
-func getFlagByTxHash(context *gin.Context) {
+func (s *Server) getFlagByTxHash(context *gin.Context) {
 	token := context.Query("token")
 	txHash := context.Query("tx")
-	if token == "" || txHash == "" {
+	if len(txHash) == 0 || len(txHash) != 64 {
 		context.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
 
-	if len(txHash) != 64 || len(token) != 32 {
-		context.AbortWithStatus(http.StatusBadRequest)
-		return
-	}
-
-	account := internal.NewAccount(token)
-	verifier := internal.NewFlagVerifier(txHash, account)
-	err := verifier.ValidateTx(os.Getenv("LCD"))
-	if err != nil {
+	if err := s.verifier.ValidateTx(txHash, token); err != nil {
 		resp(context, err.Error(), "", "")
 		return
 	}
 
-	resp(context, "", "", os.Getenv("FLAG"))
+	resp(context, "", "", s.cfg.Flag)
 }

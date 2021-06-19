@@ -1,26 +1,14 @@
 package internal
 
 import (
-	"strings"
-
 	"github.com/cosmos/cosmos-sdk/crypto/keys"
 	"github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/iczc/billboard/playground/util"
+	"github.com/iczc/billboard/playground/common"
 )
 
-type Account struct {
-	Token string
-}
-
-func NewAccount(token string) *Account {
-	return &Account{
-		Token: token + strings.Repeat("0", 32),
-	}
-}
-
-func (a *Account) GetAddress() (string, error) {
-	mnemonic, err := util.GenerateMnemonic(a.Token)
+func getAddressByToken(token string) (string, error) {
+	mnemonic, err := common.GenerateMnemonic(token)
 	if err != nil {
 		return "", err
 	}
@@ -30,7 +18,7 @@ func (a *Account) GetAddress() (string, error) {
 	hdPath := keys.CreateHDPath(account, index).String()
 
 	var bip39Passphrase string
-	privKey, err := util.GetPrivKeyFromMnemonic(mnemonic, bip39Passphrase, hdPath)
+	privKey, err := common.GetPrivKeyFromMnemonic(mnemonic, bip39Passphrase, hdPath)
 	if err != nil {
 		return "", err
 	}

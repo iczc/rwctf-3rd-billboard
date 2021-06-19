@@ -29,7 +29,6 @@ services:
       - "8080"
     links:
       - lcd
-    command: server
     depends_on:
       - lcd
 

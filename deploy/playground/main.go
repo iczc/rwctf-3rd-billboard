@@ -1,26 +1,10 @@
 package main
 
 import (
-	"fmt"
-	"os"
-
-	_ "github.com/joho/godotenv/autoload"
-	"github.com/spf13/cobra"
-
-	"github.com/iczc/billboard/playground/cmd/server"
+	"github.com/iczc/billboard/playground/api"
+	"github.com/iczc/billboard/playground/config"
 )
 
 func main() {
-	rootCmd := cobra.Command{
-		Use: "billboard-playground",
-	}
-
-	rootCmd.AddCommand(
-		server.Cmd,
-	)
-
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Printf("Failed executing CLI command: %s, exiting...\n", err)
-		os.Exit(1)
-	}
+	api.NewServer(config.NewConfig()).Run()
 }
