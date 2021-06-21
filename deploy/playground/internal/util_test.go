@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestGetAddressByToken(t *testing.T) {
+func TestCalcAddressByToken(t *testing.T) {
 	tests := []struct {
 		name    string
 		token   string
@@ -16,13 +16,13 @@ func TestGetAddressByToken(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := getAddressByToken(tt.token)
+			got, err := calcAddressByToken(tt.token)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("getAddressByToken() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("calcAddressByToken() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("getAddressByToken() got = %v, want %v", got, tt.want)
+				t.Errorf("calcAddressByToken() got = %v, want %v", got, tt.want)
 			}
 		})
 	}

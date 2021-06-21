@@ -3,8 +3,6 @@ package internal
 import (
 	"errors"
 	"strings"
-
-	"github.com/iczc/billboard/playground/common"
 )
 
 type Verifier struct {
@@ -26,7 +24,7 @@ func NewFlagVerifier(lcd string, checkMode string) *Verifier {
 }
 
 func (v *Verifier) ValidateTx(txHash, token string) error {
-	result, err := common.QueryTx(v.lcd, strings.ToUpper(txHash))
+	result, err := queryTxInfo(v.lcd, strings.ToUpper(txHash))
 	if err != nil {
 		return err
 	}
@@ -41,7 +39,7 @@ func (v *Verifier) ValidateTx(txHash, token string) error {
 	}
 
 	if v.checkWinner {
-		if address, err := getAddressByToken(token); err != nil || ctfMsg.Value.Winner != address {
+		if address, err := calcAddressByToken(token); err != nil || ctfMsg.Value.Winner != address {
 			return errors.New("invalid winner")
 		}
 	}
