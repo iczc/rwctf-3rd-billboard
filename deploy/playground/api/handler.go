@@ -25,7 +25,7 @@ func resp(context *gin.Context, err, msg, data string) {
 func (s *Server) getFlagByTxHash(context *gin.Context) {
 	token := context.Query("token")
 	txHash := context.Query("tx")
-	if len(txHash) == 0 || len(txHash) != 64 {
+	if len(txHash) != 64 {
 		context.AbortWithStatus(http.StatusBadRequest)
 		return
 	}

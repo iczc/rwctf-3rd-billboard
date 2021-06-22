@@ -12,9 +12,7 @@ type Verifier struct {
 
 func NewFlagVerifier(lcd string, checkMode string) *Verifier {
 	var checkWinner bool
-	if checkMode == "0" {
-		checkWinner = false
-	} else {
+	if checkMode != "0" {
 		checkWinner = true
 	}
 	return &Verifier{
