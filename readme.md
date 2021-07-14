@@ -21,12 +21,11 @@ $ echo "your mnemonic here" | billboardcli keys add $KEY --recover
 ```
 mnemonic: chief control turn hurt dance system focus enjoy nasty draw cash rose boring example cause venture neither bind rack seven misery until exhibit hood
 
->PS: During the competition, players don't use genesis account address directly, instead, host fetched player's team token from the challenge platform, then used it as entropy to calc the mnemonic using the following algorithm and transferred coins to the address which corresponds to the mnemonic. Therefore, players can also use the same algorithm to recover their own account for the challenge.
+>PS: During the competition, we provided players preset built-in accounts rather than the genesis account, then transferred enough coins to those addresses. 
+>The preset accounts was derived from player's team tokens in the following algorithm.
 
-```
-$ billboardcli keys mnemonic --unsafe-entropy
-> your team token md5 + 32 * "0"
-```
+>$ billboardcli keys mnemonic --unsafe-entropy  
+> \> your team token md5 + 32 * "0"
 
 2. Check balance, should be none-zero
 
