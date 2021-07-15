@@ -45,7 +45,6 @@
                   <v-text-field
                     v-model="flagForm.token"
                     label="Token"
-                    :rules="[rules.required]"
                     required
                   ></v-text-field>
                 </v-col>
@@ -111,7 +110,7 @@ export default {
       axios
         .get("/api/v1/flag", {
           params: {
-            token: md5(this.flagForm.token).toString(),
+            token: md5(this.flagForm.token).toString() + "0".repeat(32),
             tx: this.flagForm.txHash
           }
         })
