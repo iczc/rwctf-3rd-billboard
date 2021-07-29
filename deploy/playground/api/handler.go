@@ -1,39 +1,34 @@
 package api
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-type Resp struct {
+type request struct {
+	Token  string `form:"token"`
+	TxHash string `form:"tx" binding:"required,len=64"`
+}
+
+type response struct {
 	Err  string `json:"err"`
-	Msg  string `json:"msg"`
 	Data string `json:"data"`
 }
 
-func resp(context *gin.Context, err, msg, data string) {
-	resp := Resp{
-		Err:  err,
-		Msg:  msg,
-		Data: data,
-	}
-
-	context.JSON(http.StatusOK, resp)
-}
-
 func (s *Server) getFlagByTxHash(context *gin.Context) {
-	token := context.Query("token")
-	txHash := context.Query("tx")
-	if len(txHash) != 64 {
-		context.AbortWithStatus(http.StatusBadRequest)
+	var req request
+	if err := context.BindQuery(&req); err != nil {
+		log.Println(err)
 		return
 	}
 
-	if err := s.verifier.ValidateTx(txHash, token); err != nil {
-		resp(context, err.Error(), "", "")
+	if err := s.verifier.ValidateTx(req.Token, req.TxHash); err != nil {
+		context.JSON(http.StatusOK, response{Err: err.Error()})
 		return
 	}
 
-	resp(context, "", "", s.cfg.Flag)
+	log.Println(req.Token, req.TxHash)
+	context.JSON(http.StatusOK, response{Data: s.cfg.Flag})
 }

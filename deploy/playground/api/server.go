@@ -1,6 +1,8 @@
 package api
 
 import (
+	"log"
+
 	"github.com/gin-gonic/gin"
 
 	"github.com/iczc/billboard/playground/config"
@@ -33,5 +35,5 @@ func (s *Server) setupRouter() {
 }
 
 func (s *Server) Run() {
-	s.engine.Run(":" + s.cfg.Port)
+	log.Fatal(s.engine.Run(":" + s.cfg.Port))
 }

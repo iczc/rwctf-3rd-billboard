@@ -21,7 +21,7 @@ func NewFlagVerifier(lcd string, checkMode string) *Verifier {
 	}
 }
 
-func (v *Verifier) ValidateTx(txHash, token string) error {
+func (v *Verifier) ValidateTx(token, txHash string) error {
 	result, err := queryTxInfo(v.lcd, strings.ToUpper(txHash))
 	if err != nil {
 		return err
