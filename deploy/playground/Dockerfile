@@ -15,6 +15,6 @@ WORKDIR /app
 COPY --from=build-env /build/.env .
 COPY --from=build-env /build/billboard-playground .
 
-EXPOSE 8080
+EXPOSE 5000
 
 ENTRYPOINT ["./billboard-playground"]

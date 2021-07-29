@@ -26,7 +26,7 @@ services:
     build: playground
     container_name: playground-api
     expose:
-      - "8080"
+      - "5000"
     links:
       - lcd
     depends_on:
