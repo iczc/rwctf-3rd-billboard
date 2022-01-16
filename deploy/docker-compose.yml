@@ -23,7 +23,8 @@ services:
       - node
 
   api:
-    build: playground
+    # build: playground
+    image: iczc/billboard-playground-api:latest
     container_name: playground-api
     expose:
       - "5000"
@@ -33,7 +34,8 @@ services:
       - lcd
 
   web:
-    build: playground/web
+    # build: playground/web
+    image: iczc/billboard-playground-web:latest
     container_name: playground-web
     ports:
       - "80:80"
