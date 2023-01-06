@@ -45,7 +45,7 @@ $ billboardcli tx billboard create-advertisement $ID $CONTENT --from $KEY --chai
 
 ## Deployment
 ```
-$ git clone https://github.com/iczc/billboard.git
+$ git clone https://github.com/iczc/rwctf-3rd-billboard.git
 $ cd billboard/deploy
 $ docker-compose up -d
 ```
